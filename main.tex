@@ -1,0 +1,1104 @@
+\documentclass{book}
+\usepackage[utf8]{inputenc}    
+\usepackage{lmodern}
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{calrsfs}
+\usepackage{stmaryrd}
+\usepackage{minted}
+\usepackage{fancyhdr}
+\usepackage[inline]{asymptote} 
+\usepackage[linesnumbered,ruled,french,onelanguage]{algorithm2e}
+\SetKwComment{Comment}{$\triangleright$\ }{}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    linktoc=section,
+    linkcolor=red,
+    urlcolor=orange,
+    filecolor=red
+}
+\usepackage{times}
+\usepackage{todonotes}
+\usepackage{latexsym}
+\usepackage{verbatim}
+\usepackage{amsmath,amssymb}
+\usepackage{upgreek}
+\usepackage{dsfont}
+\usepackage{framed}
+\usepackage{amsfonts}
+\newcommand{\tocheck}[1]{\textcolor{blue}{#1}}
+\newcommand{\overbar}[1]{\mkern 3mu\overline{\mkern-3mu#1\mkern-3mu}\mkern 3mu}
+\usepackage{fullpage,setspace}
+\linespread{1.5}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{lemma}{Lemme}
+\newtheorem{theorem}{Théorème}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{definition}{Définition}
+\newtheorem{heuristique}{Heuristique}
+\newtheorem{scenario}{Scénario}
+\newtheorem{fact}{Fait}
+\newtheorem{example}{Exemple}
+\newtheorem{postulate}{Postulat}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollaire}
+\newtheorem{property}{Propriété}
+\numberwithin{lemma}{subsection}
+\numberwithin{theorem}{subsection}
+\numberwithin{definition}{subsection}
+\numberwithin{proposition}{subsection}
+\numberwithin{corollary}{subsection}
+\numberwithin{property}{subsection}
+\numberwithin{example}{subsection}
+\numberwithin{heuristique}{subsection}
+\numberwithin{scenario}{subsection}
+\newenvironment{proofi} {\noindent\emph{Preuve~:}} {\hfill $\square$\vspace{0.2cm}}
+\newcommand{\eod}{\ensuremath{\hfill\dashv}}
+\newcommand{\eop}{\ensuremath{\hfill\clubsuit}}
+\newcommand{\fun}[1]{\ensuremath{\mbox{\it #1}}}
+\newcommand{\expo}[2]{{#1}^{\mbox{\scriptsize \sl #2}}}
+\newcommand{\var}{\ensuremath{\mathbf{var}}\xspace}
+\newcommand{\exv}{\ensuremath{\mathbf{exv}}\xspace}
+\newcommand{\dsv}{\ensuremath{\mathbf{dsv}}\xspace}
+\newcommand{\term}{\ensuremath{\mathbf{term}}\xspace}
+\newcommand{\pred}{\ensuremath{\mathbf{pred}}\xspace}
+\newcommand{\fr}{\ensuremath{\mathbf{fr}}\xspace}
+\newcommand{\cnst}{\ensuremath{\mathbf{cnst}}\xspace}
+\newcommand{\Vars}{\ensuremath{\mathsf{Vars}}\xspace}
+\newcommand{\Pvars}{\ensuremath{\mathsf{Pvars}}\xspace}
+\newcommand{\Fvars}{\ensuremath{\mathsf{Fvars}}\xspace}
+\newcommand{\Terms}{\ensuremath{\mathsf{Terms}}\xspace}
+\newcommand{\Cons}{\ensuremath{\mathsf{Const}}\xspace}
+\newcommand{\Preds}{\ensuremath{\mathsf{Preds}}\xspace}
+\newcommand{\ic}{\ensuremath{\cdot\{}\xspace}
+\newcommand{\ci}{\ensuremath{\}\cdot}\xspace}
+\newcommand{\id}{\ensuremath{:\hspace{-1.56mm}\{}\xspace}
+\newcommand{\di}{\ensuremath{\}\hspace{-1.56mm}:}\xspace}
+\newcommand{\bet}{\ensuremath{\beta^{\diamond}}\xspace}
+\newcommand{\sep}{\ensuremath{\mathbf{sep}}\xspace}
+\newcommand{\vect}[1]{\mathbf{#1}}
+\newcommand{\vars}[1]{\fun{vars}{(#1)}}
+\newcommand{\terms}[1]{\fun{terms}{(#1)}}
+\newcommand{\atoms}[1]{\fun{atoms}{(#1)}}
+\newcommand{\type}[1]{\fun{type}{(#1)}}
+\newcommand{\const}{a}
+\newcommand{\atom}{\alpha}
+
+\newcommand{\GodelFunc}[1]{\varphi_{#1}}
+\newcommand{\Universal}{\mathcal{U}}
+\newcommand{\Pairing}[1]{\langle #1 \rangle}
+
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\img}{img}
+\DeclareMathOperator{\graph}{graph}
+
+\newcommand{\EnsFin}{\mathrm{Fin}}
+\newcommand{\EnsInf}{\mathrm{Inf}}
+\newcommand{\EnsTot}{\mathrm{Tot}}
+\newcommand{\EnsCon}{\mathrm{Con}}
+\newcommand{\EnsCof}{\mathrm{Cof}}
+\newcommand{\EnsCput}{\mathrm{Cput}}
+\newcommand{\EnsExt}{\mathrm{Ext}}
+
+\newcommand{\Token}[1]{\hspace{.25pt}\raisebox{-.2em}{\includegraphics[height=1.5em]{fig/RTokens/#1}}\hspace{.25pt}}
+\newcommand{\CarolToken}[1]{\hspace{.25pt}\raisebox{-.2em}{\includegraphics[height=1.5em]{fig/CTokens/#1}}\hspace{.25pt}}
+\newcommand{\CustomToken}[1]{\tikz[baseline=-5.5pt]{
+            \node[draw,rectangle,rounded corners=4pt,fill=gray!50,minimum size=1.45em] (P)at(0,0){#1};}}
+
+\newcounter{deuxfois}
+\newcommand{\sig}{\ensuremath{\mathbf{sig}}\xspace}
+
+\usepackage{color}
+\definecolor{gren}{rgb}{0.158, 0.488, 0.408}
+\definecolor{bren}{rgb}{0.45, 0.21, 0.000}
+
+\title{Calculabilité et complexité}
+\author{Guillaume Kihli, Julien Rodriguez, Mattéo Delabre}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\chapter{Machines et modèles de calcul}
+    \section*{Introduction}
+    \section{Définitions de base}
+        \begin{definition}
+            Un modèle de calcul est un modèle qui décrit comment un ensemble de sorties sont calculées étant donné un ensemble d'entrées. Ce modèle décrit comment les unités de calcul, la mémoire et la communication sont organisés\footnote{\url{https://en.wikipedia.org/wiki/Model\_of\_computation}}.
+        \end{definition}
+        
+        \begin{definition}
+            Machine : il s'agit d'une instance d'un modèle de calcul.
+        \end{definition}
+        
+        \paragraph{Notation} Les machines sont notées $M_i$, $i$ étant un entier qui décrit la machine. Les fonctions calculées par ces machines sont notées $\varphi_i$.
+        
+        \begin{definition}\textbf{Fonction totale et fonction partielle}
+            \par Une fonction est totale si son domaine est l'ensemble des entiers naturels. Sinon, elle est partielle
+        \end{definition}
+        
+        \begin{definition}\label{def:fonc_rec}\textbf{Fonction calculable / récursive}\footnote{\url{https://en.wikipedia.org/wiki/Computable\_function}}
+            Une fonction est calculable si elle est totale et qu'elle peut être calculée en temps fini par une machine.
+        \end{definition}
+        
+        \begin{definition}\textbf{Fonction semi-calculable / partielle récursive}\footnote{\url{https://fr.wikipedia.org/wiki/Fonction_semi-calculable}}
+            Une fonction est semi-calculable si elle est partielle et qu'elle peut être calculée en temps fini par une machine sur les entrées de son domaine.
+        \end{definition}
+    
+    \section{Quelques modèles de calcul}
+        \subsection{Fonctions récursives primitives}
+            \begin{definition}
+            En théorie de la calculabilité, une fonction récursive primitive est une fonction construite à partir de la fonction nulle, fonction successeur, fonctions projections et les schémas primitifs de récursion et de composition\footnote{\url{https://fr.wikipedia.org/wiki/Fonction\_r\%C3\%A9cursive\_primitive}}. Ces fonctions constituent un sous-ensemble strict des fonctions récursives.
+            \par Elles ont été initialement analysées par la mathématicienne Rózsa Péter.
+            \par On construit les fonctions récursives primitives par induction en partant des trois fonctions de base :
+            \begin{itemize}
+            	\item La fonction identiquement nulle ;
+            	\item La fonction successeur : $Succ(t)=t+1$ ;
+            	\item Les projections : $(x_{1},...,x_{k})\rightarrow x_{i}$.
+            \end{itemize}
+            et en itérant les deux constructions suivantes :
+            \begin{itemize}
+            	\item La composition de fonctions : 
+            si $g_{1}, g_{2}, ..., g_{k}$ sont récursives primitives sur $\mathbb {N} ^{n}$ 
+            et si $h$ est récursive primitive sur $\mathbb {N} ^{k}$, toutes déjà définies,
+            alors la fonction $f=h(g_{1},...,g_{k})$ est une fonction récursive primitive définie sur $\mathbb {N} ^{n}$ ;
+            
+            	\item La définition récursive d'une fonction : 
+            si $g$ est récursive primitive sur $\mathbb {N} ^{n}$, et $h$ récursive primitive sur ${\mathbb  N}\times {\mathbb  N}\times {\mathbb  N}^{n}$, on définit une nouvelle fonction récursive primitive $f$ sur ${\mathbb  N}^{{n+1}}$ par :
+            	\begin{itemize}
+            		\item $f(0,\vec y) = g(\vec y)$
+            		\item $ f(Succ(x),\vec y) = h(x,f(x,\vec y),\vec y)$.
+            	\end{itemize}
+            \end{itemize}
+            \end{definition}
+            
+            \subsubsection{Jetons de Rozsa}
+                
+                Les jetons de Rozsa sont un modèle de calcul à visée pédagogique basé sur le modèle des fonctions récursives primitives.
+            
+                \begin{definition}{Jetons de bases}
+                \begin{itemize}
+                \item \Token{0} : $~ \mapsto 0$
+                \item \Token{S} : $~x \mapsto x+1$
+                \item \Token{I} : $~x \mapsto x$
+                \end{itemize}
+                \end{definition}
+                
+                \begin{definition}{Constructeurs}
+                \begin{itemize}
+                \item \Token{G} : $~x, \bar{y} \mapsto \bar{y}$
+                \item \Token{D} : $~\bar{x}, y \mapsto \bar{x}$
+                \item Soient une fonction $f$ récursive primitive d'arité $k$ et les fonctions récursives primitives $g_1,g_2,\ldots,g_k$ d'arité $n$. \par $\Token{C}(f,g_1,g_2,\ldots,g_k)(\bar{x}) = f(g_1(\bar{x}),g_2(\bar{x}),\ldots,g_k(\bar{x}))$.
+                \item Soit $f$ une fonction récursive primitive d'arité $n$ et $g$ une fonction récursive primitive d'arité $n+2$. On obtient, la fonction récursive primitive d'arité $n+1$ :
+                \par $\Token{R}(f,g)(x, \bar{y}) = \left\{
+                	\begin{array}{ll}
+                		f(\bar{y}) & si ~x = 0 \\
+                		g(x-1,\Token{R}(f,g)(x-1, \bar{y}),\bar{y}) & sinon
+                	\end{array} \right.
+                	$
+                \end{itemize}
+                \end{definition}
+            
+            \paragraph{Code d'une machine}
+        
+                Pour attribuer un code à n'importe quelle suite de jetons, il suffit d'attribuer un entier à chaque jeton puis de coder la suite comme un entier en base 7.    
+        
+            \paragraph{Lien vers l'interpréteur} \href{http://rozsa-tokens.info/}{Interpréteur de jetons de Rozsa en ligne : http://rozsa-tokens.info/}
+            
+             \subsubsection{Limite de puissance}
+                
+                Les fonctions récursives primitives ne permettent pas de calculer tout ce qui est calculable. Il existe en effet des fonctions calculables qui ne sont pas récursives primitives.
+                
+                \paragraph{Fonction d'Ackerman-Peter}
+                
+                La fonction d'Ackermann-Péter est un exemple de fonction calculable mais non-récursive primitive\footnote{\url{https://fr.wikipedia.org/wiki/Fonction\_d\%27Ackermann}}.
+                \begin{definition}
+                $A(m, n) = 
+                  \begin{cases}
+                     n+1 & \mbox{si } m = 0 \\
+                     A(m-1, 1) & \mbox{si } m > 0 \mbox{ et } n = 0 \\
+                     A(m-1, A(m, n-1)) & \mbox{si } m > 0 \mbox{ et } n > 0.
+                  \end{cases}$
+                \end{definition}
+                
+                La démonstration ne sera pas détaillée, mais l'idée est de démontrer que la fonction d'Ackermann-Peter croit plus vite que n'importe quelle fonction récursive primitive et donc qu'elle ne peut faire partie de l'ensemble des fonctions récursives primitives.
+            
+        \subsection{Fonctions µ-récursives}
+            \begin{definition}
+            En informatique et en mathématiques, le terme fonction récursive\footnote{\url{https://fr.wikipedia.org/wiki/Fonction\_r\%C3\%A9cursive}} (ou fonction $\mu$-recursive\footnote{\url{https://en.wikipedia.org/wiki/\%CE\%9C-recursive\_function}}) désigne une classe de fonctions calculables, autrement dit de fonctions dont les valeurs peuvent être calculées à partir de leurs paramètres par un processus mécanique.
+            \par Les fonctions récursives primitives sont une sous-partie stricte de l'ensemble des fonctions récursives, elles ne permettent pas de calculer tout ce qui est calculable. Il est nécessaire d'y ajouter une fonction nommée $\mu$.
+            \end{definition}
+        
+            \begin{definition}{Fonction $\mu$}
+            \par $\Token{M}(f) : \bar{y} \mapsto min\{x : f(x,\bar{y}) = 0\}$.
+            \par À noter : contrairement aux fonctions récursives primitives, $\mu$ n'est pas définie sur tout son domaine : il s'agit d'une fonction récursive partielle.
+            \end{definition}
+            
+            
+            
+            \begin{theorem}\textbf{Forme normale de Kleene}\label{th:forme_norm_Kleene}
+               \par Il existe un prédicat $T$ et une fonction $U$, tous deux récursifs primitifs, tel que, quel que soit $e$ : $ \varphi_e(\bar{x}) = U((\mu(y,e,\bar{x}) \mapsto T(e, \bar{x}, y))(e,\bar{x})) $\footnote{\url{https://en.wikipedia.org/wiki/\%CE\%9C-recursive\_function\#Normal\_form\_theorem}}.
+            \end{theorem}
+            
+            Cela a pour conséquence que toute fonction récursive peut-être calculée en utilisant une seule fois la fonction µ.
+            
+        \subsection{Fonctions récursives primitives sur les ensembles}
+                En mathématiques, les fonctions récursives primitives sur les ensembles\footnote{\url{https://en.wikipedia.org/wiki/Primitive\_recursive\_set\_function}} (ou sur les ordinaux), sont similaires aux fonctions récursives primitives présentées précédemment, mais portent sur les ensembles ou les ordinaux au lieu des entiers naturels. Ils ont été présentés par Carol Karp et Ronald Jensen en 1971.
+                \begin{definition}\textbf{Ensemble pur}
+                \par Ensemble ne contenant que des ensembles.
+                \end{definition}
+                \begin{definition}\textbf{Univers de Von Neumann (hiérachie cumulative)}\footnote{\url{https://fr.wikipedia.org/wiki/Univers\_de\_von\_Neumann\#La\_hi\%C3\%A9rarchie\_cumulative}}
+                    \begin{itemize}
+                        \item $V_0 = \emptyset$;
+                        \item $V_{\alpha+1} = \mathcal{P}(V_\alpha)$;
+                        \item $V\alpha = \bigcup\limits_{\beta<\alpha}V_\beta$.
+                    \end{itemize}
+                \end{definition}
+            \begin{definition}
+                \par Une fonction récursive primitive sur les ensembles est une fonction qui reçoit un ensemble pur et renvoie un ensemble pur et elle est construite à partir des éléments ci-dessous.
+                \paragraph{Fonctions de base}
+                \begin{itemize}
+                    \item Projection : $P_{n,m}(x_1,\ldots,x_n) = x_m$
+                    \item Zero : $Z() = \emptyset$
+                    \item Ajoindre un élément à un ensemble\footnote{\url{https://en.wikipedia.org/wiki/Axiom\_of\_adjunction}} : $A(x,y) = x \cup \{y\}$
+                    \item Tester l'appartenance : $C(x,y,u,v) = \begin{cases}
+                        x & si~ u \in v \\
+                        y & sinon 
+                    \end{cases}$
+                \end{itemize}
+                \paragraph{Règles pour obtenir de nouvelles fonctions par substitution}
+                \begin{itemize}
+                    \item $F(\bar{x},\bar{y}) = G(\bar{x},H(\bar{x}),\bar{y})$
+                    \item $F(\bar{x},\bar{y}) = G(H(\bar{x}),\bar{y})$
+                \end{itemize}
+                où $G$ et $H$ sont des fonctions primitives récursives sur les ensembles. 
+            \end{definition}
+            \paragraph{Règle pour la récursion}
+            $F(z,\bar{x}) = G(\bigcup\limits_{u\in z}F(u,\bar{x}),z,\bar{x})$.
+            \begin{definition}\textbf{Définition des ordinaux}
+                \par On définit que $0 = \emptyset$.
+                \par On obtient les autres ordinaux en transformant la fonction d'adjonction en fonction successeur : $S(x) = A(x,x) = x \cup \{x\}$.
+            \end{definition}
+            \subsubsection{Jetons de Carol}
+                
+                Les jetons de Carol sont le pendant des jetons Rozsa pour les fonctions récursives primitives sur les ensembles.
+                
+                \paragraph{Jetons de base}
+                    \begin{itemize}
+                    \item $\CarolToken{0} :~ \mapsto \emptyset$
+                    \item $\CarolToken{U} : x,y \mapsto x \cup \{y\}$
+                    \item $\CarolToken{I} : x \mapsto x$
+                    \item $\CarolToken{in} : x,y,u,v \mapsto \begin{cases}
+                        x & si~ u \in v \\
+                        y & sinon 
+                    \end{cases}$
+                    \end{itemize}
+                \paragraph{Constructeurs ayant la même définition que leur version Rozsa : }
+                    \CarolToken{C}\CarolToken{G}\CarolToken{D}
+                \paragraph{Récursion}
+                    $h=\CarolToken{R}g=z,\bar{x} \mapsto g(\bigcup\limits_{u\in z}h(u,\bar{x}),z,\bar{x})$
+        \subsection{Quelques autres modèles de calcul}
+            \begin{itemize}
+                \item \href{https://fr.wikipedia.org/wiki/Machine_de_Turing}{Machines de Turing}
+                \item \href{https://fr.wikipedia.org/wiki/Lambda_calcul}{Lambda calcul}
+                \item \href{https://fr.wikipedia.org/wiki/Machine\_\%C3\%A0\_compteurs}{Machines à compteur}
+                \item \href{https://en.wikipedia.org/wiki/Post\%E2\%80\%93Turing\_machine}{Machines de Post}
+            \end{itemize}
+    
+    \section{Théorèmes et propriétés}
+        \subsection{Puissance des modèles de calcul}
+            \begin{definition}\textbf{Thèse de Church-Turing}\footnote{\url{https://en.wikipedia.org/wiki/Church\%E2\%80\%93Turing\_thesis}}
+                \par Une fonction sur les entiers est calculable par des humains suivant un algorithme si et seulement si elle est calculable par une machine de Turing.
+            \end{definition}
+            Une conséquence de cette thèse est que tout ce qui est calculable peut être calculé par une Machine de Turing.
+            \par Cette thèse avait été formulée à la base par Alonzo Church concernant le $\lambda-calcul$. Ce dernier a en effet une puissance équivalente aux machines de Turing (on dit aussi qu'il est Turing-complet\footnote{\url{https://fr.wikipedia.org/wiki/Turing-complet}}).
+            De même, les fonctions récursives ont une puissance équivalente aux machines de Turing, mais pas les fonctions récursives primitives, qui sont non Turing-complètes.
+            Toutes ces équivalences vont dans le sens de la thèse de Church-Turing.
+            \par En terme de puissance, l'hypercalcul\footnote{\url{https://fr.wikipedia.org/wiki/Hypercalcul}} est supérieur à la machine de Turing, ayant été proposé dans l'objectif de pouvoir calculer des fonctions non turing-calculables, mais il n'existe à ce jour aucune preuve qu'il soit physiquement réalisable.
+        
+        \subsection{Étapes de calculs et calculs parallèles}
+            \begin{definition}\textbf{Arrêt après $s$ étapes de calcul}
+                \par Il est possible d'arrêter une machine après $s$ étapes de calcul ($s$ étant un entier). On notera $\varphi_{i,s}$ la fonction $i$ arrêtée après $s$ étapes.
+            \end{definition}
+            \begin{definition}\textbf{Ensemble dénombrable}
+                \par Tout ensemble en bijection avec les entiers naturels est dénombrable.
+            \end{definition}
+            \begin{theorem}
+                $\mathbb{N}^2$ est un ensemble dénombrable.
+            \end{theorem}
+            \begin{proofi}
+                Il est possible de définir une application bijective de $\mathbb{N}^2$ dans $\mathbb{N}$ telle que définie ci-dessous.
+            \end{proofi}
+            \begin{definition}\textbf{Fonction d'appariement de Cantor}\footnote{\url{https://fr.wikipedia.org/wiki/Fonction\_d\%27appariement}}
+                \par $f : x,y \mapsto \frac{(x+y)(x+y+1)}{2}+y$.
+                \par On notera le codage de $x,y$ :$\langle x,y \rangle$.
+            \end{definition}
+            Ce codage est très utile en ce qu'il va permettre de transformer deux entiers naturels en un seul (par exemple les entiers $i$ et $s$ pour le code et le nombre d'étapes d'une machine).
+            \begin{definition}\textbf{Inverse de la fonction d'appariement}
+                \par $\pi^{-1}(z)=\left(\frac{w(w+3)}2-z,z-\frac{w(w+1)}2\right)$. Avec $w=\lfloor \frac{-1+\sqrt{1+8z}}2\rfloor$.
+                \par On notera $x = (\langle x,y \rangle)_0$ et $y = (\langle x,y \rangle)_1$.
+            \end{definition}
+            \paragraph{Généralisation à $\mathbb{N}^n$} Il est possible de généraliser l'appariement à $\mathbb{N}^n$. Pour ce faire, il suffit de composer les appariements. Par exemple, pour coder $(x,y,z)$, on peut faire $\langle \langle x,y \rangle, z\rangle$.
+            \begin{definition}\textbf{Dove-tailing (déployeur universel)}\footnote{\url{https://fr.wikipedia.org/wiki/D\%C3\%A9ployeur\_universel}}
+                \par Un déployeur universel, appelé parfois dovetailer, est une machine abstraite simulant l’exécution de toutes les autres machines de son modèle de calcul sur toutes les entrées possibles.
+                \par Le principal obstacle à la construction d’un déployeur universel est l’existence de machines qui bouclent indéfiniment et empêchent le déployeur de passer à la simulation des autres machines. Le schéma classique pour pallier ce problème est le suivant :
+                \begin{itemize}
+                    \item[1] Énumérer les triplets d’entiers $(i,e,s)\in \mathbb{N} ^{3}$ en utilisant la fonction d'appariement de Cantor.
+                    \item[2] Par un codage, associer à $i$ une entrée $I_{i}$.
+                    \item[3] Par un codage, associer à $e$ une machine $M_{e}$.
+                    \item[4] Simuler $M_{e}$ sur l’entrée $I_{i}$ pendant $s$ étapes.
+                \end{itemize}
+            \end{definition}
+        \subsection{Propriétés sur le code des machines}
+            \begin{definition}\textbf{Machine universelle}\footnote{\url{https://fr.wikipedia.org/wiki/Machine\_de\_Turing\_universelle}}
+                \par Une machine universelle est une machine qui est capable de simuler toutes les autres machines de son modèle de calcul en recevant en entrée le code de la machine à simuler et l'entrée sur laquelle l'exécuter.
+                \par On a donc $\mathcal{U}(e,x) = \psi_e(x) = \varphi_e(x_1,x_2,\ldots,x_n)$ avec $x = \langle x_1, x_2, \ldots x_n\rangle$.
+                \par Pour les fonctions récursives, on peut obtenir une fonction universelle en se basant sur la forme normale de Kleene : $\mathcal{U}(e,x) = \varphi_e(x) = U(\mu(y,e,x) \mapsto T(e,x,y))(e,x))$.
+            \end{definition}
+            
+            \begin{theorem}\textbf{Théorème d'itération ($s_{mn}$)}\footnote{\url{https://fr.wikipedia.org/wiki/Th\%C3\%A9or\%C3\%A8me\_d\%27it\%C3\%A9ration}}\label{th:iteration}
+                \par Si $\varphi$ est une énumération acceptable, alors il existe une fonction partielle récursive $s$ telle que pour tout indice $\mathbf {e}$ et tous nombres $x$ et $y$ : $\varphi_{s(\mathbf{e},x)}(y)=\varphi_{\mathbf{e}}(x,y)$.
+                \par Plus généralement, pour tous $m,n > 0$, il existe une fonction primitive récursive $s^m_n$ d'arité $m+1$ qui se comporte ainsi : pour tout code $p$ d'une fonction partielle calculable d'arité $m+n$ et pour les valeurs $x_1, x_2, \dots, x_m$ : $\varphi_{s^m_n (p,x_1,\dots,x_m)} \cong \varphi_p(x_1,\dots,x_m,y_1,\dots,y_n)$.
+                \par La fonction $s$ décrite précédemment est la fonction d'itération $s_1^1$.
+            \end{theorem}
+            
+            \begin{proofi}
+                \begin{itemize}
+                    \item[i] Commençons par montrer que $\psi : y \mapsto \langle 0,y \rangle$ est récursif primitif. Pour ce faire, nous allons montrer que la fonction d'appariement de Cantor est récursive primitive en exhibant la suite de jetons de Rozsa qui la calcule.
+                    \par Cette suite est : \Token{C}\CustomToken{+}\Token{C}\CustomToken{/2}\Token{C}\CustomToken{*}\CustomToken{+}\Token{C}\Token{S}\CustomToken{+}\Token{D}\Token{I}
+                    \item[ii] Montrons maintenant que $\zeta : \langle x,y \rangle \mapsto \langle x+1,y \rangle$ est récursive primitive.
+                    \par Nous avons montré précédemment que la fonction d'appariement est récursive primitive. Cette fonction étant bijective, son inverse est aussi récursif primitif. Il suffit donc de décoder (x,y), et puis coder (x+1,y). Cette fonction est donc récursive primitive.
+                    \item[iii] Montrons qu'il existe une fonction récursive primitive $c$ telle que $\forall e,i, \varphi_{c(e,i)} = \varphi_e \circ \varphi_i$.
+                    \par Si on considère que le code pour le jeton de Rozsa de composition est 5, alors on peut définir $c$ de la manière qui suit : $c(e,i) = 5 * 8^{|e|+|i|}+e*8^{|i|}+i$. Si on voit 5, $e$, $i$ comme des chaînes binaires, l'opération que l'on vient d'effectuer revient tout simplement à les concaténer. En fait, nous renvoyons le code de la suite de jetons de Rozsa \Token{C}\CustomToken{$\varphi_e$}\CustomToken{$\varphi_i$}.
+                    \item[iv] Montrons qu'il existe une fonction $\xi$ récursive primitive telle que $\varphi_{\xi(x)}(y) = \langle x,y \rangle$.
+                    \par Encore une fois, il s'agit juste d'exhiber la suite de jetons de Rozsa qui la calcule : \par $\xi=$ \Token{R}\CustomToken{$e_\psi$}\Token{G}\Token{C}\CustomToken{c}\Token{G}\CustomToken{$e_\zeta$}\Token{I}, $e_\psi$ et $e_\zeta$ étant les codes des fonctions $\psi$ et $\zeta$ définies précédemment.
+                    \item[v] Enfin, montrons le théorème. Pour cela, montrons qu'il existe $s$ récursif primitive telle que $\varphi_{s(e,x)}(y) = \varphi(\langle x,y \rangle)$ (cette forme est équivalente à celle donnée dans le théorème car il suffit de décoder $\langle x,y \rangle$).
+                    \par On peut définir $s$ de la manière suivante : $s(e,x) = c(e,\xi(x))$ car $\varphi_e(\langle x,y \rangle) = \varphi_e(\varphi_{\xi(x)}(y))$.
+                    \par Il est alors facile d'exhiber une suite de jetons qui la calcule : $s = $ \Token{C}\CustomToken{c}\Token{D}\Token{I}\Token{G}\CustomToken{$\xi$}.
+                    \par Cette démonstration se généralise quels que soient $m$ et $n$ car il suffit d'appliquer la fonction d'appariement sur $x$ et $y$ autant de fois qu'il fait pour obtenir le nombre de paramètres souhaité.
+                \end{itemize}
+            \end{proofi}
+            
+            \begin{theorem}\textbf{Théorème du point fixe de Rogers\footnote{\url{https://en.wikipedia.org/wiki/Kleene\%27s\_recursion\_theorem\#Rogers's\_fixed-point\_theorem}} / récursion de Kleene\footnote{\url{https://fr.wikipedia.org/wiki/Th\%C3\%A9or\%C3\%A8me\_de\_r\%C3\%A9cursion\_de\_Kleene\#Th\%C3\%A9or\%C3\%A8me\_de\_point\_fixe}}}
+                \par Pour toute fonction $f$ calculable, il existe $i$ tel que $\varphi_i \cong \varphi_{f(i)}$ (forme de Rogers).
+                \par Variantes : 
+                \begin{itemize}
+                    \item Pour toute fonction $f$ calculable, il existe $e$ tel que $\varphi_e(x) \cong f(e,x) = \varphi_z(e,x)$.
+                    \item Forme paramétrée : Il existe une fonction calculable $n$ telle que pour tout $x$ et $y$, $\varphi_{n(y)}(x)=\varphi_{\varphi_{y}(n(y))}(x)$.
+                \end{itemize}
+            \end{theorem}
+            
+            \begin{proofi}
+                \begin{itemize}
+                    \item[i] Tout d'abord, montrons qu'il existe une fonction calculable totale $d$ telle que $\varphi_{d(i)}(z) = \begin{cases}
+                        \varphi_{\varphi_i(i)}(z) & si~\varphi_i(i)\downarrow \\
+                        \uparrow & sinon
+                    \end{cases}$.
+                    \par Soit $\psi(\langle i,z \rangle) = \begin{cases}
+                        \varphi_{\varphi_i(i)}(z) & si~\varphi_i(i)\downarrow \\
+                        \uparrow & sinon
+                    \end{cases}$.
+                    \par si $\varphi_i(i) = v \uparrow$, on calcule $\varphi_v(z)$, donc $\psi$ est calculable partielle. Donc il existe $e$ tel que $\varphi_e = \psi$.
+                    \par D'après le théorème d'itération, il existe $s$ calculable totale telle que $\varphi_{s(e,i)}(z) = \varphi_e(\langle i,z \rangle) = \psi (\langle i,z \rangle)$. 
+                    \par On pose donc $d : i \mapsto s(e,i)$.
+                    \par On a alors : $\varphi_{d(i)}(z) = \varphi_{s(e,i)}(z) = \varphi_e(\langle i,z \rangle) = \begin{cases}
+                        \varphi_{\varphi_i(i)}(z) & si~\varphi_i(i)\downarrow \\
+                        \uparrow & sinon
+                    \end{cases}$.
+                    \item[ii] Montrons maintenant que quelle que soit $g$ calculable et totale, il existe $i$ tel que $\varphi_i \cong \varphi_{g(i)}$.
+                    \par On commence par composer $g$ et $d$ : $g \circ d = $ \Token{C}\CustomToken{$g$}\CustomToken{$d$}. Comme $g$ et $d$ sont calculables et totales, leur composition l'est aussi. Il existe donc $c$ tel que $\varphi_c = g \circ d$.
+                    \par On alors $\varphi_{d(c)}(z) = \varphi_{\varphi_c(c)}(z)$ totale car $\varphi_c(c) \downarrow$ car elle est égale à par définition à $g \circ d$. On a donc $\varphi_{d(c)}(z) = \varphi_{g \circ d (c)}(z)$.
+                    \par Il ne reste plus qu'à poser $i = d(c)$ et on obtient $\varphi_i = \varphi_{d(c)} = \varphi_{g \circ d(c)} = \varphi_{g(i)}$.
+                \end{itemize}
+            \end{proofi}
+            
+            \begin{lemma}\textbf{Padding lemma (lemme du bourrage)}
+                $\forall e, \exists i, M_e \cong M_i$
+            \end{lemma}
+            
+            \begin{proofi}
+                Soit une machine $M_e$. Alors, $M_i = $ \Token{C}\Token{I}\CustomToken{$M_e$}.
+            \end{proofi}
+            
+            \begin{corollary}
+                On déduit de la preuve du lemme que non seulement il existe un tel $i$, mais qu'il y en a plus une infinité et plus précisément il y en a $\aleph_0 = |\mathbb{N}|$.
+            \end{corollary}
+            
+            \begin{theorem}\textbf{Théorème de l'énumération}\label{th:enum}
+                \par Il existe une fonction partielle calculable à 2 variables $\varphi_z^{(2)}(e,x)$ telle que $\varphi_z^{(2)}(e,x) = \varphi_e(x)$.
+            \end{theorem}
+            
+            \begin{proofi}
+                Soit $z$ tel que $\varphi_z(e,x) = \mathcal{U}(e,x)$, $\mathcal{U}$ étant une machine universelle. Alors $\varphi_e(x) = \mathcal{U}(e,x) = \varphi_z(e,x)$.
+            \end{proofi}
+
+\chapter{Calculabilité}
+    %\section*{Introduction}
+
+    \section{Ensembles}
+    \subsection{Définitions de base}
+            \begin{definition}\textbf{Fonction caractéristique}\footnote{\url{https://fr.wikipedia.org/wiki/Fonction\_caract\%C3\%A9ristique\_(th\%C3\%A9orie\_des\_ensembles)}}
+                Une fonction caractéristique est une fonction définie sur un ensemble E qui explicite l’appartenance ou non à un sous-ensemble F de E de tout élément de E. 
+                $$\begin{array}{rcl} \chi_F : E & \longrightarrow & \{0,1\}  \\
+                x & \longmapsto & \left\{\begin{matrix}  1 \ \mbox{si} \ x \ \in \ F \\ 0 \ \mbox{si} \ x \ \notin \ F \end{matrix}\right. \end{array}$$
+            \end{definition}
+    
+            \begin{definition}\textbf{Ensemble récursif}\footnote{\url{https://fr.wikipedia.org/wiki/Ensemble\_r\%C3\%A9cursif}}
+                \par Un ensemble récursif ou ensemble décidable est un ensemble d'entiers dont la fonction caractéristique est une fonction récursive (déf. \ref{def:fonc_rec}).
+            \end{definition}
+        
+            \begin{definition}\textbf{Ensemble récursivement énumérable}\footnote{\url{https://fr.wikipedia.org/wiki/R\%C3\%A9cursivement_\%C3\%A9num\%C3\%A9rable}}
+                \par Un ensemble récursivement énumérable ou ensemble semi-décidable est un ensemble d'entiers qui correspond au domaine d'une fonction partielle calculable. C'est à dire : $\exists e$ tel que $X = \dom{\varphi_e} = W_e$.
+                \begin{itemize}
+                    \item $W_e = \dom \varphi_e = \{x : \varphi_e(x)\downarrow\} = \{x : \exists y T(e,x,y)\}$ (voir th. \ref{th:forme_norm_Kleene} pour $T$)
+                    \item $W_{e,s} = \dom \varphi_{e,s}$
+                    \item $\varphi_e(x) = y \Leftrightarrow \exists s \varphi_{e,s}(x) = y$
+                    \item $ x \in W_e \Leftrightarrow \exists s, x \in W_{e,s} $
+                \end{itemize}
+            \end{definition}
+            
+            \begin{theorem}
+                Tout ensemble récursif $A$ est récursivement énumérable.
+            \end{theorem}
+            
+            \begin{proofi}
+                $A = \dom \psi$ où $\psi(x) = \begin{cases}
+                    1 & \mathrm{si}~\chi_A(x) = 1 \\
+                    \uparrow & \mathrm{sinon}
+                \end{cases}$
+            \end{proofi}
+            
+            \paragraph{Notation} $\mathbb{N}$ sera parfois noté dans ce cours $\omega$.
+            
+            \begin{definition}\textbf{Ensemble d'indices}\label{def:ens_indices}
+                \par $A$ est un ensemble d'indices si $\forall x, \forall y, (x \in A \mathrm{~et~} \GodelFunc{x}=\GodelFunc{y}) \Rightarrow y \in A$.
+            \end{definition}
+        
+        \subsection{Quelques ensembles}
+        \subsubsection{Ensembles récursifs}
+            \begin{itemize}
+                \item $\{\Pairing{e,x,s}, \GodelFunc{e,s}(x)\downarrow\} $
+                \item $\{\Pairing{e,x,y,s}, \GodelFunc{e,s}(x) = y\} $
+            \end{itemize}
+            
+        \subsubsection{Ensembles récursivement énumérables}
+            \begin{itemize}
+                \item $K = \{x:\GodelFunc{x}(x)\downarrow\} = \{x:x \in W_x\} = \{e : \exists s, \exists y, \GodelFunc{e,s}(e) = y\}$
+                    \par \begin{proofi}
+                        \begin{itemize}
+                            \item Récursivement énumérable : $K = \dom \theta $ où $ \theta(x) = \GodelFunc{z}(x,x) = \GodelFunc{x}(x)$ (voir th. \ref{th:enum}).
+                            \item Non récursif : Soit $f = \begin{cases}
+                                \GodelFunc{x}(x)+1 & \mathrm{ si~ } x \in K \\
+                                0 & \mathrm{sinon}
+                            \end{cases}$.
+                            \par Par hypothèse, $f$ est calculable et donc il existe $e$ tel que $\GodelFunc{e} = f$. Deux cas :
+                            \begin{itemize}
+                                \item $e \in K \Rightarrow \GodelFunc{e}(e) = f(e) = \GodelFunc{e}(e)+1$ : contradiction.
+                                \item $e \not\in K \Rightarrow \GodelFunc{e}(e) = f(e) = 0 \Rightarrow \GodelFunc{e}(e)\downarrow \Rightarrow e \in K$ : contradiction.
+                            \end{itemize}
+                            \vspace{-\baselineskip}
+                        \end{itemize}
+                        \vspace{-\baselineskip}
+                    \end{proofi}
+                \item $K_0 = \{\Pairing{x, e}:\GodelFunc{e}(x)\downarrow\} = \{\Pairing{x, e}:x \in W_e\} = \{\Pairing{x,e} : \exists s, \exists y, \GodelFunc{e,s}(x) = y\}$ 
+                \par Ensemble représentant le problème de l'arrêt (def. \ref{def:pb_arret})
+                    \par \begin{proofi}
+                        \begin{itemize}
+                        \item Récursivement énumérable : $K_0 = \dom \theta $ où $ \theta(\Pairing{x,y}) = \GodelFunc{z}(y,x) = \GodelFunc{y}(x)$ (voir th. \ref{th:enum}).
+                        \item Non récursif : voir corollaire \ref{cor:K0_non_rec}.
+                        \end{itemize}
+                        \vspace{-\baselineskip}
+                        \vspace{-\baselineskip}
+                    \end{proofi}
+                    
+                \item $K_1 = \{x:\exists y, \GodelFunc{x}(y)\downarrow\} = \{x:W_x \not= \emptyset\} = \{e : \exists s, \exists x, x \in W_{e,s}\}$
+                    \par\begin{proofi}
+                        \par Non récursivité : voir corollaire \ref{cor:K_1_non_rec}
+                    \end{proofi}
+                \item $\img \GodelFunc{e} = \{y : \exists s, \exists x, \GodelFunc{e,s}(x) = y\}$
+                \item $\graph \GodelFunc{e} = \{(x,y) : \exists s, \GodelFunc{e,s}(x) = y\}$
+            \end{itemize}
+            
+        \subsubsection{Ensembles non récursifs}
+            \begin{itemize}
+                \item $\EnsFin = \{x:W_x\text{ est fini}\}$
+                \item $\EnsInf = \omega \setminus Fin = \{x:W_x\text{ est infini}\}$
+                \item $\EnsTot = \{x:\GodelFunc{x}\text{ est totale}\} = \{x:W_x = \omega \}$
+                    \par\begin{proofi}
+                        \par Non récursivité : voir corollaire \ref{cor:Tot_non_rec}
+                    \end{proofi}
+                \item $\EnsCon = \{x:\GodelFunc{x}\text{ est totale et constante}\}$
+                    \par\begin{proofi}
+                        \par Non récursivité : voir corollaire \ref{cor:Con_non_rec}
+                    \end{proofi}
+                \item $\EnsCof = \{x:W_x\text{ est cofini}\}$
+                \item $\EnsCput = \{x:W_x\text{ est recursif}\}$
+                \item $\EnsExt = \{x : \GodelFunc{x} \mbox{~peut être étendue en fonction totale calculable~}\}$
+            \end{itemize}
+            
+            \subsubsection{Ensembles d'indices}
+            \begin{itemize}
+                \item $K_1$
+                \item $\EnsFin$
+                \item $\EnsCon$
+                \item $\EnsFin$
+                \item $\EnsCof$
+                \item $\EnsCput$
+                \item $\EnsTot$
+                \item $\EnsExt$
+            \end{itemize}
+            
+            \paragraph{Conséquence} Tous ces ensembles étant des ensembles d'indices non triviaux, ils ne sont pas calculables (voir th. \ref{th:ens_ind_non_trivial_non_calc}).
+    
+    \section{Réductions / comparaison des ensembles}
+        \begin{definition}\textbf{Réduction}\footnote{\url{https://fr.wikipedia.org/wiki/R\%C3\%A9duction\_(complexit\%C3\%A9)}}
+            \par Une réduction est un algorithme transformant un problème en un autre.
+            \par Cet outil sert à montrer qu'un problème est au moins aussi difficile qu'un autre : si un problème $A$ peut être réduit à un problème $B$, et que le problème A est difficile alors le problème B est au moins aussi difficile. On écrit alors $A \leq B$ (lire "$A$ se réduit à $B$"). 
+            \par Plus formellement : soit deux ensembles d'entiers naturels $A$ et $B$, et un ensemble de fonctions $F$ de $\mathbb{N}$ dans $\mathbb{N}$, clos par composition, $A$ est dit réductible à $B$ par $F$ si : $\exists f \in F \mbox{ . } \forall x \in \mathbb{N} \mbox{ . } x \in A \Leftrightarrow f(x) \in B$. On note alors $A \leq_{F} B$ (lire "$A$ se $F$-réduit à $B$").
+        \end{definition}
+    
+        \subsection{Réduction \textit{many-one}}
+        
+            \begin{definition}\textbf{Réduction \textit{many-one}}
+            \footnote{\url{https://en.wikipedia.org/wiki/Many-one\_reduction}}\label{def:reduction_many-one}
+                \par Soit deux ensembles $A,B \subseteq \mathbb{N}$. On dit $A$ est \textit{many-one} réductible à $B$ si il existe une fonction calculable totale $f$ telle que $A = f^{-1}(B)$. On écrit alors $A \leq_{\mathrm{m}} B$.
+                \par Si $f$ est en plus injective, alors $A$ est 1-réductible à $B$ et on écrit alors $A \leq_1 B$.
+                \par Variante : $A \leq_m B$ si il existe une fonction calculable $f$ telle que $f(A) \subseteq B$ et $f(\bar{A}) \subseteq \bar{B}$, autrement dit $x \in A \Leftrightarrow f(x) \in B$.
+            \end{definition}
+            
+            \begin{theorem}
+                Si $A \leq_m B$ et $B$ est récursif, alors $A$ est aussi récursif.
+            \end{theorem}
+            
+            \begin{proofi}
+                Si $A \leq_m B$, alors via $f$ on a $\chi_A(x) = \chi_B(f(x))$ et donc $A$ est calculable si $B$ est récursif.
+            \end{proofi}
+            
+            \begin{theorem}
+                Si $A$ non récursif et $A \leq_m B$ alors $B$ n'est pas récursif.
+            \end{theorem}
+            
+            \begin{proofi}
+                Si on a $A \leq_m B$, alors on peut obtenir la fonction caractéristique de $A$ en calculant celle de $B$ : $\chi_A(x) = \chi_B(f(x))$. Or, si $B$ est calculable, alors la fonction caractéristique de $A$ est aussi calculable. Comme $A$ n'est pas récursif, on en déduit que $B$ ne l'est pas non plus.
+            \end{proofi}
+            
+            \paragraph{Remarque} Ces deux théorèmes sont très utiles pour démontrer la calculabilité ou la non-calculabilité d'un ensemble.
+            
+            \begin{theorem}
+                Si $A \leq_m B$ via $f$, alors $\bar{A} \leq_m \bar{B}$ via $f$.
+            \end{theorem}
+            
+            \begin{proofi}
+                Voir variante de déf. \ref{def:reduction_many-one}.
+            \end{proofi}
+            
+            \begin{theorem}\label{th:many_one_refl_trans}
+                $\leq_m$ et $\leq_1$ sont réflexifs et transitifs.
+            \end{theorem}
+            
+            \begin{definition}\textbf{m-équivalence}\footnote{\url{https://en.wikipedia.org/wiki/Many-one\_reduction\#Many-one\_equivalence\_and\_1-equivalence}}\label{def:m_equiv}
+                \par Si $A \leq_{\mathrm{m}} B ~ \mathrm{ et } ~ B \leq_{\mathrm{m}} A$ alors on dit que $A$ est \textit{many-one} équivalent ou m-équivalent à $B$ et on note $A \equiv_m B$.
+                \par Si $A \leq_{1} B ~ \mathrm{ et } ~ B \leq_{1} A$ alors on dit que $A$ est 1-équivalent à $B$ et on note $A \equiv_1 B$.
+            \end{definition}
+            
+            \begin{definition}\textbf{m-complétude}\footnote{\url{https://en.wikipedia.org/wiki/Many-one\_reduction\#Many-one\_completeness\_(m-completeness)}}
+                \par $B$ est dit \textit{many-one} complet ou m-complet ssi $B$ est récursivement énumérable et que tout ensemble récursivement énumérable $A$ est m-réductible à $B$. Autrement dit, on a $W_e \leq_m B$ pour tout ensemble $W_e$.
+                \par On dit qu'il est 1-complet si tout ensemble récursivement énumérable $A$ est 1-réductible à $B$. Autrement dit, on a $W_e \leq_1 B$ pour tout ensemble $W_e$.
+            \end{definition}
+        
+        \subsubsection{Quelques m-réductions}
+        
+            \begin{theorem}
+                $K \leq_1 K_0$.
+            \end{theorem}
+            
+            \begin{proofi}
+                Soit $f(x) = \Pairing{x,x}$. On a $x \in K \Leftrightarrow f(x) \in K_0$.
+            \end{proofi}
+            
+            \begin{corollary}\label{cor:K0_non_rec}
+                $K \leq_1 K_0$ et $K$ non récursif $\Rightarrow K_0$ non récursif.
+            \end{corollary}
+            
+            \begin{theorem}
+                $K \leq_1 \EnsTot$.
+            \end{theorem}
+            
+            \begin{proofi}
+                Soit $\psi(x,y) = \begin{cases}
+                    1 & \mathrm{si~} x \in K \\
+                    \uparrow & \mathrm{sinon}
+                \end{cases}$.
+                \par $\psi$ est partielle calculable, donc il existe $e$ tel que $\GodelFunc{e}(x,y) = \psi(x,y)$.
+                \par Par le théorème d'itération (th. \ref{th:iteration}), il existe une fonction $s$ telle que $\GodelFunc{e}(x,y) \cong \GodelFunc{s(e,x)}(y)$. 
+                \par Posons $f : x \mapsto s(e,x)$. $f$ est injective puisque $s$ l'est.
+                \par On obtient :
+                \begin{itemize}
+                    \item $x \in K \Rightarrow \GodelFunc{f(x)} : y \mapsto 1 \Rightarrow f(x) \in Tot$
+                    \item $x \not\in K \Rightarrow \forall y, \GodelFunc{f(x)}(y)\uparrow \Rightarrow f(x) \not\in Tot$
+                \end{itemize}
+                \vspace{-\baselineskip}
+            \end{proofi}
+            
+            \begin{corollary}\label{cor:Tot_non_rec}
+                $K \leq_1 \EnsTot$ et $K$ non récursif $\Rightarrow \EnsTot$ non récursif.
+            \end{corollary}
+            
+            \begin{theorem}
+                $K \leq_1 \EnsCon$.
+            \end{theorem}
+            
+            \begin{proofi}
+                Reprenons les mêmes $\psi$ et $f$ que pour la preuve de $K \leq_1 \EnsTot$.
+                \par On obtient :
+                \begin{itemize}
+                    \item $x \in K \Rightarrow \GodelFunc{f(x)} : y \mapsto 1 \Rightarrow f(x) \in \EnsCon$
+                    \item $x \not\in K \Rightarrow \forall y, \GodelFunc{f(x)}(y)\uparrow \Rightarrow f(x) \not\in \EnsCon$
+                \end{itemize}
+                \vspace{-\baselineskip}
+            \end{proofi}
+            
+            \begin{corollary}\label{cor:Con_non_rec}
+                $K \leq_1 \EnsCon$ et $K$ non récursif $\Rightarrow \EnsCon$ non récursif.
+            \end{corollary}
+            
+            \begin{theorem}
+                $K \leq_1 K_1$.
+            \end{theorem}
+            
+            \begin{proofi}
+                Reprenons les mêmes $\psi$ et $f$ que pour la preuve de $K \leq_1 \EnsTot$.
+                \par On obtient :
+                \begin{itemize}
+                    \item $x \in K \Rightarrow \GodelFunc{f(x)} : y \mapsto 1 \Rightarrow f(x) \in K_1$
+                    \item $x \not\in K \Rightarrow \forall y, \GodelFunc{f(x)}(y)\uparrow \Rightarrow f(x) \not\in K_1$
+                \end{itemize}
+                \vspace{-\baselineskip}
+            \end{proofi}
+            
+            \begin{corollary}\label{cor:K_1_non_rec}
+                $K \leq_1 K_1$ et $K$ non récursif $\Rightarrow K_1$ non récursif.
+            \end{corollary}
+            
+            \subsubsection{Quelques ensembles 1-complet}
+            
+            \begin{theorem}
+                $K_0$ est 1-complet.
+            \end{theorem}
+            
+            \begin{proofi}
+                Soit 
+            \end{proofi}
+        
+        \subsection{Réduction Turing}
+        
+            \begin{definition}\textbf{Oracle}
+            \footnote{\url{https://en.wikipedia.org/wiki/Oracle\_machine}}
+                \par Un oracle est une machine abstraite servant à étudier des problèmes de décision. Il peut être visualisé comme une machine de Turing à boîte noire ou comme un jeton supplémentaire pour les jetons de Rozsa ou de Carol, qui va permettre de calculer un problème décision en une seule opération.
+                \par Cela peut par exemple être un problème indécidable comme le problème de l'arrêt (def. \ref{def:pb_arret}).
+            \end{definition}
+            
+            \begin{definition}\textbf{Réduction \textit{Turing}}
+            \footnote{\url{https://en.wikipedia.org/wiki/Turing\_reduction}}
+                \par Soit deux ensembles $A, B \subseteq \mathbb{N}$. On dit que $A$ est Turing-réductible à $B$, noté $A \leq_T B$, si il y a un oracle qui calcule la fonction caractéristique de $A$ à l'aide d'un oracle calculant $B$. On dit aussi que $A$ est $B$-récursif ou $B$-calculable.
+                \par Si il y a un oracle qui, en utilisant l'oracle calculant $B$, calcule une fonction partielle ayant pour domaine $A$, alors on dit que $A$ est $B$-récursivement énumérable.
+            \end{definition}
+                
+            \begin{definition}\textbf{Turing-équivalence}\label{def:Turing_equiv}
+                \par Si $A \leq_{\mathrm{T}} B ~ \mathrm{ et } ~ B \leq_{\mathrm{T}} A$ alors on dit que $A$ est Turing-équivalent à $B$ et on note $A \equiv_T B$.
+                \par Les classes d'équivalence correspondant à la Turing-équivalence sont nommés des degrés Turing (def \ref{def:deg_turing}).
+            \end{definition}
+            
+            \begin{definition}\textbf{Turing difficile}
+                \par Soit un ensemble $\mathcal{X} \subseteq \mathcal{P}(\mathbb{N})$. Un ensemble $A \subseteq \mathbb{N}$ est Turing difficile pour $\mathcal{X}$ si $\forall X \in \mathcal{X}, A \leq_T X$.
+            \end{definition}
+            
+            \begin{definition}\textbf{Turing complétude}
+                \par Soit $A$ un ensemble Turing difficile pour $\mathcal{X}$. Il est dit Turing complet pour $\mathcal{X}$ si $A \in \mathcal{X}$.
+            \end{definition}
+            
+        \subsection{Théorème de rice}
+            
+            \begin{definition}\label{def:pb_arret}\textbf{Problème de l'arrêt}\footnote{\url{https://fr.wikipedia.org/wiki/Probl\%C3\%A8me\_de\_l\%27arr\%C3\%AAt}}
+                \par Le problème de l'arrêt consiste à savoir pour $x, y$ si $\varphi_x(y) \downarrow$. En d'autres termes, cela revient à savoir si une machine $M_x$ s'arrête sur l'entrée $y$.
+            \end{definition}
+            
+            \begin{theorem}
+                Le problème de l'arrêt est indécidable.
+            \end{theorem}
+            
+            \begin{proofi}
+            Supposons que le problème de l'arrêt soit décidable. Alors il existe un prédicat $p(x, y)$ telle que : 
+            \[
+                p(x, y) = \begin{cases}
+                0 & \text{si }\varphi_x(y) \uparrow\\
+                1 & \text{sinon}.
+                \end{cases}
+            \]
+            
+            On remarque que par $p$ on peut énumérer les entiers de la forme $<x, y>$ qui vérifie $\varphi_x(y) \downarrow$. Soit $K_0 = \{\Pairing{x, y}:\GodelFunc{x}(y)\downarrow\} = \{\Pairing{x, y}:y \in W_x\}$ alors $p = \chi_{K_0} $.
+            
+            Par hypothèse $\varphi$ et $p$ sont calculables. Considérons la fonction $\varphi_e(x)$ suivante : 
+            
+            \[
+                \varphi_e(x) = \begin{cases}
+                \uparrow & \text{si }p(x, x) = 1\\
+                0 & \text{sinon}.
+                \end{cases}
+            \]
+            
+            Pour $x = e$ on a :
+            
+            \begin{itemize}
+                \item Si $\varphi_e(e) \downarrow$ alors $p(e, e) = 1$. Mais par définition $\varphi_e \uparrow$ si $p(e, e) = 1$. Contradiction. 
+                \item Si $\varphi_e(e) \uparrow$ alors $p(e, e) = 0$ mais par définition $\varphi_e(e) \downarrow$ si $p(e, e) = 0$. Contradiction.
+            \end{itemize}
+            \end{proofi}
+            
+            
+            \begin{theorem}\label{th:ens_ind_non_trivial_non_calc}
+                \par Si $A$ est un ensemble d'indices non-trivial ($A \not\in \{\varnothing, \mathbb{N}\}$), alors on a:
+                \begin{itemize}
+                    \item $K \leq_1 A$
+                    \item ou $K \leq_1 \bar{A}$.
+                \end{itemize}
+            \end{theorem}
+            
+            \begin{corollary}
+                \par Si $A$ est un ensemble d'indices non-trivial ($A \not\in \{\varnothing, \mathbb{N}\}$), alors on a:
+                \begin{itemize}
+                    \item $A$ n'est pas calculable.
+                    \item ou $\overline{A}$ n'est pas calculable.
+                \end{itemize}
+            \end{corollary}
+            
+            \begin{theorem}\textbf{Théorème de Rice}\footnote{\url{https://fr.wikipedia.org/wiki/Th\%C3\%A9or\%C3\%A8me\_de\_Rice}}
+                \par Soit $C$ une classe de fonctions partielles calculables. Alors $ \left \{ n : \varphi_n \in C \right \}$ est calculable si et seulement si $C = \varnothing$ ou si $C$ est la classe de toutes les fonctions partielles calculables.
+            \end{theorem}
+            
+            \begin{proofi}
+                Soit $e_0$ tel que $\forall y, \GodelFunc{e_0}(y)\uparrow$.
+                \par Si $e_0 \in \bar{A}$, alors on montre $K \leq_1 A$, sinon on montre $K \leq_1 \bar{A}$ en remplaçant $A$ par $\bar{A}$ dans la démonstration.
+                \par Puisque $A \not= \emptyset$, on peut choisir $e_1 \in A$. Puisque $A$ est un ensemble d'indices (def. \ref{def:ens_indices}), $\GodelFunc{e_0} \not= \GodelFunc{e_1}$.
+                \par À l'aide du théorème d'itération (th. \ref{th:iteration}), on définit la fonction $\GodelFunc{f(x)}(y) = \begin{cases}
+                    \GodelFunc{e_1}(y) & \mathrm{si~} x \in K \\
+                    \uparrow & \mathrm{sinon}
+                \end{cases}$.
+                \par On obtient :
+                \begin{itemize}
+                    \item $x \in K \Rightarrow \GodelFunc{f(x)}(y) = \GodelFunc{e_1}(y) \Rightarrow f(x) \in A$ ;
+                    \item $x \not\in K \Rightarrow \GodelFunc{f(x)}(y) = \GodelFunc{e_0}(y) \Rightarrow f(x) \not\in A$
+                \end{itemize}
+            \end{proofi}
+            
+            \paragraph{Note} Il est possible d'avoir à la fois $K \leq_1 A$ et $K \leq_1 \bar{A}$ (c'est le cas pour $\EnsTot$).
+        
+        \subsection{Degrés de calculabilité}
+            Un des objectifs de la calculabilité est de classer les problèmes selon leur solvabilité en évaluant leur degré.
+                
+            \subsubsection{Degrés \textit{many-one}}
+                \begin{definition}\textbf{Degré \textit{many-one}}
+                    \par Le degré \textit{many-one} est une classe d'équivalence de la relation $\equiv_m$ (déf. \ref{def:m_equiv}).
+                    \par Les classes d'équivalence de $\equiv_m$ sont appelées m-degrés et celles de $\equiv_1$ des 1-degrés.
+                    \par $deg_m(A) = \{B : A \equiv_m B\}$ et $deg_1(A) = \{B : A \equiv_1 B\}$.
+                \end{definition}
+                
+                \begin{theorem}
+                    $K \equiv_1 K_0 \equiv_1 K_1$
+                \end{theorem}
+                \begin{theorem}
+                    $\EnsInf \equiv_1 \EnsTot \equiv_1 \EnsCon$
+                \end{theorem}
+                \begin{theorem}
+                    $\EnsCof \equiv_1 \EnsCput \equiv_1 \EnsExt$
+                \end{theorem}
+            
+            \subsubsection{Degrés Turing}
+                \begin{definition}\label{def:deg_turing}\textbf{Degré Turing}\footnote{\url{https://fr.wikipedia.org/wiki/Degr\%C3\%A9\_de\_Turing}}
+                    \par Le degré Turing est une classe d'équivalence de la relation $\equiv_T$ (déf. \ref{def:Turing_equiv}).
+                    \par Les notations $[X]$ et $deg_T(X)$ désignent la classe d'équivalence contenant $X$ : $deg_T(X) = \{Y : X \equiv_T Y\}$. 
+                    \par La collection entière des degrés Turing est notée $\mathcal{D}$.
+                \end{definition}
+            
+                Les degrés Turing forment un ensemble partiellement ordonnée (\textit{poset}\footnote{\url{https://fr.wikipedia.org/wiki/Poset}}) : $[X] \leq [Y] \Leftrightarrow X \leq_T Y$.
+                \par Il y a un degré de Turing unique, contenant tous les ensembles récursifs, inférieur à tous les autres degrés : il est noté 0, car il est le plus petit élément du poset $\mathcal{D}$.
+                
+            \begin{itemize}
+                \item Projection d'une relation
+                \item Uniformisation / fonction de sélection
+                \item ensemble re = treillis distributif
+                \item Degrés incomparables
+            \end{itemize}
+                
+        \subsection{Hiérachie arithmétique}
+        \subsection{Théorème de Post}
+%    \section{Théorèmes et propriétés}
+      %  \begin{itemize}
+       %     \item m-complétude
+      %      \item fonctions de sélection
+     %   \end{itemize}
+    
+    \section{Propriétés sur les ensembles}
+        \begin{itemize}
+            %\item Diagonale Cantor
+            %\item K (ensemble diagonal)
+            %\item Autres ensembles (Tot, cput, etc)
+            \item ensembles productifs / créatifs
+            \item Ensembles complets
+            \item Théorème MyHill
+        \end{itemize}
+
+\chapter{Complexité}
+    \section*{Introduction}
+
+Machine de Turing avec alphabet avec au moins 0 et 1 comme lettres
+\par Complexité : mesure des ressources de calcul en temps et en espace
+\par Espace utilisé par $\varphi_e(x)$ est le numéro de la case la plus éloignée de l'origine utilisée sur un ruban
+\par Le temps pour calculer $\varphi_e(x)$ est le nombre d'étapes mis pour s'arrêter
+\par ~
+\par Prolbème : instance et question
+\par Exemple : problème P. on a un graphe G, deux sommet $s_1,s_2$. Question : est-ce que ces 2 sommets sont reliés ?
+\par On peut le voir comme $(s_1,s_2)\in P$ ? $\chi_P(s_1,s_2)=1$ ?
+\par ~
+\par Machine Turing non-déterministe : il existe un chemin calculable en un certain temps
+\par re : il existe x calculable
+\par ~
+\par Réduction : $P \leqslant P'$
+\par $P(s_1,s_2)? \longrightarrow P'(r_1,r_2,r_3)?$
+
+\chapter{Bordel provisoire - ne pas lire cette partie du plan}
+\section{1-complétude}
+
+\par Un ensemble r.e. A est 1-complet si $W_e \leqslant_1 A$ pour tout ensemble $W_e$.
+\par $K_0$ est 1-complet puisque $x \in W_e \Leftrightarrow \Pairing{x, e} \in K_0$
+\par On montrera que $k$ et $K_1$ le sont aussi
+\par Ces autres ensembles ne sont pas r.e. ni même leur complément
+\par On montrera $\EnsInf \equiv_1 \EnsTot \equiv_1 \EnsCon$ et $\EnsCof \equiv_1  \EnsCput \equiv_1 \EnsExt$
+\par Un des buts de la calculabilité est de classifier les problèmes selon leur non-solvabilité en évaluant leur degré
+\par Par exemple, si $A\equiv_1 B$ pour $r=1,m,...$, alors A et B ont le même r-degré et intuitivement "codent la même information"
+
+\section{Tout sur la calculabilité}
+    \subsection{Récursivement énumérable}
+    
+\par A est une projection d'une relation $R \subseteq \omega$ si $A=\{x:\exists y, R(x,y)\}$.
+\par A est $\Sigma_1$ s'il est la projection d'une relation calculable
+\begin{definition}
+$\Sigma_1 : \phi est \Sigma_1 si \phi = \exists x, \exists y, ..., $
+\end{definition}
+\begin{theorem}
+A est r.e.e ssi A est $\Sigma_1$.
+\end{theorem}
+
+\begin{proofi}
+($\Rightarrow$) : si A est r.e. alors $A = W_e$ pour un e. ainsi $x \in W_e \Leftrightarrow \exists s, x \in W_{e,s} \Leftrightarrow \exists s, T(e,x,s)$ où T est r.p.
+\par ($\Leftarrow$) : $A=\{x:\exists y, R(x,y)\}$, où R est calculable. Alors $A = dom \psi$ où $\psi(x) = \mu y R(x,y)$.
+\end{proofi}
+
+\begin{corollary}
+La projection d'une relation r.e. est r.e.
+\end{corollary}
+
+\par A est r.e. si A est de la forme : $\{x : \exists y_1, ..., \exists y_n, R(x,y,...,y_n)\} ou R \in \omega^{n+1}$ est calculable.
+
+\section{Ensembles et relations r.e.}
+
+\par Les ensembles et relations suivantes sont r.e.
+\par $K = \{e:e\in W_e\} = \{e:\exists s, \exists y, \varphi_{e,s}(e) = y\} = \{e : \varphi_e(e) \downarrow \}$
+
+\begin{theorem}
+$K$ n'est pas récursif.
+\end{theorem}
+
+%\begin{proofi}
+%\par Si K est récursif alors $\exists f $ tel que :
+%la fonction calculable f(x) = $\left\{ \begin{array}{cc}
+    %\varphi_x(x) + 1, x \in K \\
+    %0 sinon
+%\end{array} \right.$
+%\par Alors $\exists \varphi_e = f$
+%\par ($\Rightarrow$) Si $e \in K$ alors $f(e) = \varphi_e(e)$ mais %$f(e) = \varphi_e(e) + 1 $ par définition de $f$. Donc $f(e) \neq %\varphi_e(e)$ et $e \notin K$.
+%\par ($\Leftarrow$) Si $e \notin K$ alors $f(e) = 0$ mais $f(e) = %\varphi_e(e) \downarrow$ par définition de $f$. Donc $e \in K$.
+%\par Contradiction, K n'est donc pas récursif.
+%\end{proofi}
+
+\begin{proofi}
+supposons que K est récursif et soit $\chi$ sa fonction caractéristique. Considérons la fonction suivante :
+
+\[
+\gamma(e) = \begin{cases}
+    0 & \text{si }\chi(e) = 0\\
+    \uparrow & \text{sinon}.
+\end{cases}
+\]
+
+Par hypothèse, $\chi$ et $\gamma$ sont calculables, donc prenons $e \in \mathbb{N}$ tel que $\varphi_e = \gamma$. Alors :
+
+\begin{itemize}
+    \item $e \in K \Rightarrow \chi(e) = 1 \Rightarrow \gamma(e)\uparrow\ \Rightarrow \varphi_e(e)\uparrow\ \Rightarrow e \notin K$ ;
+    \item $e \notin K \Rightarrow \chi(e) = 0 \Rightarrow \gamma(e)\downarrow\ \Rightarrow \varphi_e(e)\downarrow\ \Rightarrow e \in K$.
+\end{itemize}
+
+Contradiction. Donc K n’est pas récursif.
+\end{proofi}
+
+\begin{theorem}
+$K$ est récursivement énumérable.
+\end{theorem}
+
+\begin{proofi}
+la fonction $f : x \mapsto \Universal(x, x)$ est récursive, or $K = \dom{x \mapsto \Universal(x, x)}$, donc $K$ est r.é.
+\end{proofi}
+
+$K_0 = \{\Pairing{x,e}:x \in W_e\} = \{\Pairing{x,e} : \exists s, \exists y, \phi_{e,s} = y\}$
+
+\begin{theorem}
+$K_0$ n'est pas récursif.
+\end{theorem}
+
+\begin{proofi}
+\par Si $K_0$ est récursif alors $\exists \chi_{K_0} $ tel que :
+la fonction calculable f(x, x) = $\left\{ \chi_{K_0}(\Pairing{x, x})
+\}\right.$
+\par Or calculer $\chi_{K_0}(\Pairing{x, x}) \rightarrow$ calculer si $ x \in W_x \rightarrow \varphi_x(x) \downarrow \rightarrow x \in K$.
+\par Alors $K \equiv K_0$.
+\par Mais $K$ n'est pas récursif. Donc $K_0$ ne l'est pas non plus.
+\end{proofi}
+
+\par $K_1 = \{e : W_e \not= \emptyset\} = \{e : \exists s, \exists x, x \in W_{e,s}\}$
+
+\begin{theorem}
+$K_1$ n'est pas récursif.
+\end{theorem}
+
+\begin{proofi}
+\par Si $K_1$ est récursif alors $\exists \chi_{K_1} $ tel que :
+la fonction calculable $\chi_{K_1}(e) = \left\{ \begin{array}{cc}
+    1 si \exists x \in W_e\\
+    0 sinon
+\end{array}
+ \right.$
+\par Or calculer $\chi_{K_1}(e) \rightarrow$ calculer si $x \in W_e \rightarrow \Pairing{x, e} \in K_0$.
+\par Alors $K_0 \equiv K_1$.
+\par Mais $K_0$ n'est pas récursif. Donc $K_1$ ne l'est pas non plus.
+\end{proofi}
+
+\par $\img{\varphi_e} = \{y : \exists s, \exists x, \varphi_{e,s}(x) = y\}$
+\par $\graph{\varphi_e} = \{(x,y) : \exists s, \varphi_{e,s}(x) = y\}$
+
+\par f calculable partielle = $\varphi_e$ graphe f = graphe $\varphi_e$ r.e.
+\par $\mathcal{E} = $ famille des ensembles r.e.
+
+
+
+\section{Uniformisation}
+
+\begin{theorem}
+si $R \subseteq \omega^2$ est une relation r.e., alors il existe une fonction $\psi$ partielle et calcualble (appelée fonction de sélection pour R) telle que : $\psi(x)$ est définie $\Leftrightarrow \exists R(x,y)$.
+\par Et dans ce cas $(x,\psi(x)) \in R$. Un dincice pour $\psi$ peut être obtenu calculatoirement à partir d'un indice r.e pour R.
+\end{theorem}
+
+\begin{proofi}
+Puisque R est r.e. et donc $\Sigma_1$, il existe une realtion calculable S telle que $R(x,y)$ ssi $\exists z, S(x,y,e). \psi(x) = (\mu u S(x,(u)_1, (u)_2))_1$.
+\end{proofi}
+
+\begin{theorem}
+Une fonction partielle $\psi$ est partielle calculable ssi son graphe est r.e.
+\end{theorem}
+
+\section{Vraiment de l'énumération}
+
+\begin{theorem}
+\par (i) A est r.e ssi $A = \emptyset$ ou a est l'image d'une fonction calculable f. Un indice pour f peut être obtenu à partir d'un indice pour A.
+\par (ii) A est r.e. ssi A est gini ou A est l'image d'une fonction injective calculable.
+\end{theorem}
+
+\begin{proofi}
+(i) ($\Leftarrow$) : Si $A = \emptyset$, alors A est r.é. Si $a = imgf$ f étant calculable, A est r.e.
+\par ($\Rightarrow$) : $A = W_e \neq \emptyset$. 
+\par Soit $\Pairing{a,t}$ le plus petit entier tel que $a\in W_{e,t}$.
+Soit la fonction calculable $f(\Pairing{s,x}) = \begin{cases}
+    x & \text{si }x \in W{e,s+1} - W_{e,s} \\
+    a & \text{sinon.}
+\end{cases}$
+\par Si $x \in W_e$, alors s le plus entier tel que $x \in W_{e,s+1}$. On a $f(\Pairing{x,s}) = x.$ D'où $A = \img{f}.$
+\par (ii) : f(s) = plis petit élément $x\in W_{e,s}$ pas encore dans l'image de f.
+\end{proofi}
+
+\section{Treillis}
+
+\begin{theorem}
+Les ensembles r.e. sont clos par union et intersection (de façon uniforme : il existedes fonctions calculables f et g tellesque $W_{f(x,y)} = W_x \cup W_y$ et $W_{g(x,y)} = W_x \cap W_y$).
+\end{theorem}
+\begin{corollary}
+Soient deux ensembles r.e. A et B. Il existe deux ensembles r.e. $A_1 \subseteq A$ et $B_1 \subseteq B$ tels que $A_1 \cap B_1 = \emptyset$ et $A_1 \cup B_1 = A \cup B$.
+\end{corollary}
+\begin{theorem}
+Théorème de Post
+\par A est récusrif ssi A et $\bar{A}$ sont r.e. ($A \in \Delta_1$).
+\end{theorem}
+\begin{corollary}
+$\bar{K}$ n'est pas r.e.
+\end{corollary}
+\par Si $\bar{K} \leqslant_m A$, alors A n'est pas r.e. $\rightarrow$ Tot, Fin, Cof non r.e.
+\par Les ensembles r.e. forment un treillis distributif : $\mathcal{E} = (\{W_e\}_{e\in\omega},\subseteq,\cup,\mapsto,\emptyset,\omega)$.
+\par Les ensembles récusrifs $\rightarrow$ algèbre de Bool : $(A \in \mathcal{E} est rec ssi \bar{A}\in\mathcal{E})$
+
+
+\section{Réductions}
+
+\section{Degrés incomparables}
+
+\par Construction de A et B
+\par A et B sont calculables à partir de K mais ne sont pas comparables entre eux : leur degré n'est donc pas non plus comparable à K
+\par A et B non r.e.
+
+\section{?}
+
+\par paires Minimales : $\forall C, C \leqslant_T A et B, C$ est récursif
+
+\section{Ensembles productifs}
+
+Ensemble P productif si il existe une fonction rp qui fournit un exemple d'ensemble non re dans P.
+
+\section{Ensembles créatifs}
+
+\begin{theorem}
+Si P productif, P pas r.e.
+\par Si P productif, P contient un ensemble infinie r.e.
+\par Si P productif et $P\leqslant_mA$, A est productif
+\end{theorem}
+
+Pour exhiber d'autres ensemble productifs P, on peut montrer $\bar{K} \leqslant_m P$, c'est le cas pour tout ensemble productif (théorème Myhill).
+
+\par Créatif = complet
+\begin{corollary}
+Propositions suivantes équivalents :
+\begin{itemize}
+    \item P productif
+    \item $\bar{K} \leqslant_1 P$
+    \item $\bar{K} \leqslant_m P$
+\end{itemize}
+\end{corollary}
+\begin{corollary}
+Propositions suivantes équivalents :
+\begin{itemize}
+    \item C créatif
+    \item C 1-complet
+    \item C m-complet
+\end{itemize}
+\end{corollary}
+
+
+
+
+
+
+\end{document}
